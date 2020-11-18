@@ -2,16 +2,16 @@
 
 @section('content')          
 
-		<!-- Page Title Header Starts-->
-	    <div class="row page-title-header">
-	       	<div class="col-12">
-	         	<div class="page-header">
-	            	<h4 class="page-title">Orders</h4>
-	          	</div>
-	        </div>
-	    </div>
-	    <!-- Page Title Header Ends-->
-		
+    <!-- Page Title Header Starts-->
+      <div class="row page-title-header">
+          <div class="col-12">
+            <div class="page-header">
+                <h4 class="page-title">Orders</h4>
+              </div>
+          </div>
+      </div>
+      <!-- Page Title Header Ends-->
+    
         <div class="row">
           <div class="col-md-12 grid-margin">
             <div class="card">
@@ -30,23 +30,18 @@
                   </thead>
                   <tbody>
 
-                  	@foreach($orders as $order)
+                    @foreach($orders as $order)
                     <tr>
                       <td> {{ $loop -> index + 1 }} </td>
                       <td>#LE{{ $order -> id }} </td>
                       <td> {{ $order -> name }} </td>
                       <td> {{ $order -> phone_no }} </td>
-          					  <td>
-                        @if($order->processing)
-          							  <label class="badge badge-primary">Processing</label>
-            						@else
-            							<label class="badge badge-warning">Not Processed</label>
-            						@endif
+                      <td>
 
                         @if($order->delivered)
                           <label class="badge badge-success">Delivered</label>
                         @else
-                          <label class="badge badge-danger">Not Delivered</label>
+                          <label class="badge badge-primary">Processing</label>
                         @endif
 
                         <!-- @if($order->paid)
@@ -56,7 +51,7 @@
                         @endif -->
                       </td>
                       <td>
-      						<a href="{{ route('admin.order.show', $order->id) }}" class="btn alert-primary">View Order</a>
+                  <a href="{{ route('admin.order.show', $order->id) }}" class="btn alert-primary">View Order</a>
 
                   <a href="#deleteModal{{ $order->id }}" data-toggle="modal" class="btn btn-danger">Delete</a>
 
@@ -80,7 +75,7 @@
                         </div>
                       </div>
                     </div>
-					       </td>
+                 </td>
                 </tr>
                @endforeach
 

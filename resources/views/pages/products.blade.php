@@ -14,7 +14,6 @@
 		<div class="cat_red_button cat_add_to_cart_button red_button add_to_cart_button">
 			<form action="{{ route ('cart.store') }}" method="post"> 
 				@csrf
-				
 				<input type="hidden" name="product_id" value="{{ $product->id }}">
 				<button type="button" class="cart" value="{{ $product->id }}">add to cart</button>
 			</form>

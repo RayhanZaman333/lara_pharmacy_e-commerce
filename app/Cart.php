@@ -5,6 +5,7 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 
 use Auth;
+use App\Order;
 
 class Cart extends Model
 {
@@ -47,6 +48,20 @@ class Cart extends Model
 
 		return $carts;
     }
+
+    // public static function adminTotalCarts()
+    // {
+    //     if(Auth::check())
+    //     {
+    //         $carts = Cart::where('user_id', Auth::id())
+    //                     ->where('order_id', )
+    //                     ->get();
+    //     }else{
+    //         $carts = Cart::where('ip_address', request()->ip())->where('order_id', Order::id())->get();
+    //     }
+
+    //     return $carts;
+    // }
 
     // total item in the cart
 

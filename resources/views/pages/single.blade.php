@@ -82,7 +82,7 @@
 							<span id="quantity_value">1</span>
 							<span class="plus"><i class="fa fa-plus" aria-hidden="true"></i></span>
 						</div>
-						<div class="sin_red_button sin_add_to_cart_button">
+						<div class="red_button sin_add_to_cart_button">
 							<form action="{{ route ('cart.store') }}" method="post"> 
  							@csrf
 								<input type="hidden" name="product_id" value="{{ $product->id }}">
@@ -266,3 +266,69 @@
 	@include ('partials.benefit')
 
 @endsection
+
+
+@push('scripts')
+	<script> 
+
+		// addtocart
+
+	
+
+	// function cart(product_id)
+	// {
+	// 	console.log(product_id);
+	// 	$.post( "http://localhost:8000/carts/store", 
+	// 	{
+	// 		product_id: product_id
+	// 	})
+	// 	.done(function(data){
+	// 		// data = JSON.parse(data);
+	// 		console.log(data.total_items);
+	// 		if(data.status == 'success')
+	// 		{
+	// 			//toast
+	// 			alertify.set('notifier','position', 'top-center');
+ // 				alertify.success('Item Added to Cart Successfully!!! <br/>Total Items: ' +data.total_items+ '<br/>To chechkout: <a href="{{ route('carts') }}"><br/>Goto Checkout Page</a>');
+
+	// 			$("#totalItems").value(data.total_items);
+	// 		}
+	// 	});
+
+	// }
+
+	$(document).ready(function(){
+		$('.cart').on('click', function(){
+			let id = $(this).attr('value');
+			// console.log(id);
+
+			// $.ajaxSetup({
+			//     headers: {
+			//         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+			//     }
+
+			// }); 
+
+			$.ajax({
+				url: 'http://localhost:8000/carts/store',
+				method: 'post',
+            	data: { product_id: id },
+            	headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                        },
+            	dataType: 'json',
+				success:function(data){
+					// console.log(data.total_items);
+					//toast
+
+					alertify.set('notifier','position', 'top-center');
+ 					alertify.success('Item Added to Cart Successfully!!! Total Items: ' +data.total_items+ '<br/>Goto <a href="{{ route('carts') }}">Checkout Page</a>');
+
+					$('#totalItems').html(data.total_items);
+				}
+			})
+		});
+	});
+
+	</script>
+@endpush
